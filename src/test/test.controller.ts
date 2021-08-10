@@ -7,10 +7,11 @@ export class TestController {
   constructor(private readonly testService: TestService) {}
 
   @Get('/findName')
-  findName(
+  async findName(
     @Query('first_name') first_name: string,
     @Query('last_name') last_name: string,
-  ): Promise<TestEntity> {
-    return this.testService.findName(first_name, last_name);
+  ): Promise<TestEntity[]> {
+    const ret = this.testService.findName(first_name, last_name);
+    return ret;
   }
 }

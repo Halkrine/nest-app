@@ -2,21 +2,21 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm/dist/common/typeorm.decorators';
 import { Repository } from 'typeorm/repository/Repository';
 import { TestEntity } from './test.entity';
-import { TestRepository } from './test.repository';
 
 @Injectable()
 export class TestService {
   constructor(
-    @InjectRepository(TestRepository)
-    private readonly testRepository: TestRepository,
+    @InjectRepository(TestEntity)
+    private readonly testRepository: Repository<TestEntity>,
   ) {}
 
-  //@InjectRepository(TestRepository) private readonly testRepo: Repository<TestRepository> async getList(): Promise<TestEntity[]>{
-  //return await this.testRepo.find();
-  async findName(first_name: string, last_name: string): Promise<TestEntity> {
-    const found = await this.testRepository.findOne({
+  findName(first_name: string, last_name: string): Promise<TestEntity[]> {
+    console.log("name : " + first_name + " " + last_name);
+    return this.testRepository.find({
+      select: ["first_name"],
       where: { first_name, last_name },
     });
-    return found;
+    //console.log(Logger.log(""));
+    //return found;
   }
 }
