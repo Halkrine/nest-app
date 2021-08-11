@@ -18,7 +18,7 @@
     "eslint-config-next": "11.0.1"
   },
   "scripts": {
-    "dev" : "next dev -p 3001",
+    "front": "next dev -p 3001",
     "build": "next build",
     "start": "next start"
   }
